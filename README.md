@@ -51,3 +51,21 @@ npm run preview
 - `src/App.test.tsx`：自動テスト
 
 依存パッケージは `package-lock.json` で固定しています。`node_modules/` と `dist/`、環境変数ファイルなどは `.gitignore` で除外しています。
+
+## GitHub Pages で公開する
+
+公開先は `https://sunajima.github.io/my-first-app/` です。公開設定の変更が `main` にマージされ、GitHub Actions が成功するとアクセスできます。
+
+1. GitHub のリポジトリ画面で **Settings → Pages** を開きます。
+2. **Build and deployment → Source** で **GitHub Actions** を選びます。
+3. 設定を追加した PR を **Merge pull request → Confirm merge** で `main` に反映します。
+4. **Actions** タブから **Deploy to GitHub Pages** を開き、`build` と `deploy` が緑色になるまで待ちます。
+5. 上記の公開先 URL を開きます。
+
+すでにマージ済みで Pages の有効化が後になった場合は、**Actions → Deploy to GitHub Pages → Run workflow** でブランチ `main` を選び、**Run workflow** を押してください。失敗した実行を開いて **Re-run all jobs** で再実行することもできます。
+
+以後は `main` への反映ごとに、依存関係のインストール・テスト・ビルド・公開が自動で実行されます。PR ではテストとビルドだけを実行し、公開はしません。設定を保存するだけではサイトは公開されません。GitHub の契約やリポジトリの公開範囲によって Pages が利用できない場合は、Settings の表示を確認してください。
+
+Vite の `base` は `/my-first-app/` に設定しています。開発サーバーや `npm run preview` でも、ターミナルに表示される `/my-first-app/` 付きのアドレスを開いてください。リポジトリ名や公開先を変える場合は `vite.config.ts` の `base` も変更します。
+
+家計簿の記録は各ブラウザに保存され、GitHub Pages に送信されません。開発サーバーと公開サイトは保存領域が異なり、開発中の記録は公開サイトへ自動移行されません。
